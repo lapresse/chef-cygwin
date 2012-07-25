@@ -35,12 +35,19 @@ end
 # install, with default packages
 
 #.\setup.exe -q -O -R %CYGWIN_HOME% -s %SITE%
-#
+
+if node['cygwin']['proxy'].nil?
+    proxycmd  = ""
+else
+    proxycmd  = "--proxy #{node['cygwin']['proxy']}"
+
+
+
 execute "setup.exe" do
     # installing will create this
     not_if {File.exists?("/etc/passwd")}
     cwd node['cygwin']['download_path'] 
-    command "setup.exe -q -O -R #{node['cygwin']['home']} -s #{node['cygwin']['site']}"
+    command "setup.exe -q -O -R #{node['cygwin']['home']} -s #{node['cygwin']['site']} #{proxycmd}"
     action :run
 end
 
