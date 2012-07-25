@@ -10,7 +10,7 @@ default['cygwin']['download_url'] = "http://cygwin.com/setup.exe"
 # Cygwin HOME
 default['cygwin']['home'] = "c:/cygwin"
 # cygwin download site
-default['cygwin']['site'] = "http://cygwin.parentingamerica.com"
+default['cygwin']['site'] = "http://mirrors.kernel.org/sourceware/cygwin/"
 # proxy to use for cygwin setup.exe
 # hostname:port (no http://)
 default['cygwin']['proxy'] =  nil
