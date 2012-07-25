@@ -1,0 +1,4 @@
+.rake_test_cache
+*.swp
+cookbooks
+tmp
