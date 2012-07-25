@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: cygwin
-# Recipe:: default
+# Recipe:: ssh
 #
 # Copyright 2012, La Presse
 #
@@ -17,37 +17,23 @@
 # limitations under the License.
 #
 
+# Install and configure SSH server
 
 
-# 1st, download cygwin's setup.exe
-
-directory node['cygwin']['download_path'] do
-    action :create
-end
 
 
-remote_file "#{node['cygwin']['download_path']}/setup.exe" do
-  source node['cygwin']['download_url']
-  action :create_if_missing
-end
-
-# install, with default packages
-
-#.\setup.exe -q -O -R %CYGWIN_HOME% -s %SITE%
-
+# FIXME: make this a definition?
+#  WARNING: cut-n-paste programming here... NOOOOOOOOO!
 if node['cygwin']['proxy'].nil?
     proxycmd  = ""
 else
     proxycmd  = "--proxy #{node['cygwin']['proxy']}"
 end
-
-
-execute "setup.exe" do
-    # installing will create this
-    not_if {File.exists?("c:/cygwin/etc/passwd")}
+# FIXME: definition!!
+execute "setup-more-packages.exe" do
+    # FIXME: don't do this everytime...
+    #not_if {File.exists?("/etc/passwd")}
     cwd node['cygwin']['download_path'] 
-    command "setup.exe -q -O -R #{node['cygwin']['home']} -s #{node['cygwin']['site']} #{proxycmd}"
+    command "setup.exe -q -O -R #{node['cygwin']['home']} -s #{node['cygwin']['site']} #{proxycmd} -P openssh"
     action :run
 end
-
-
