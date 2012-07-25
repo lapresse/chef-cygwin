@@ -40,7 +40,7 @@ if node['cygwin']['proxy'].nil?
     proxycmd  = ""
 else
     proxycmd  = "--proxy #{node['cygwin']['proxy']}"
-
+end
 
 
 execute "setup.exe" do
