@@ -17,4 +17,6 @@ default['cygwin']['proxy'] =  nil
 
 
 
+default['cygwin']['sshd_user']   =  'cyg_server'
+default['cygwin']['sshd_passwd'] = nil 
 
