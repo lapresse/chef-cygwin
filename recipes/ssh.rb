@@ -21,7 +21,7 @@
 
 
 if node['cygwin']['sshd_passwd'].nil? 
-    log("No password defined for the sshd privileged users (#{}): you MUST define one in your attributes! (node['cygwin']['sshd_passwd'])"){ level :fatal}
+    raise "No password defined for the sshd privileged users (#{}): you MUST define one in your attributes! (node['cygwin']['sshd_passwd'])"
 end
 
 # Only execute if sshd is NOT already running
