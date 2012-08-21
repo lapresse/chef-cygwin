@@ -50,4 +50,7 @@ execute "setup.exe" do
     action :run
 end
 
-
+env "PATH" do
+  delim ':'
+  value "#{node['cygwin']['home']}/bin"
+end
