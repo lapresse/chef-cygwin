@@ -51,6 +51,6 @@ execute "setup.exe" do
 end
 
 env "PATH" do
-  delim ':'
+  delim ';'
   value "#{node['cygwin']['home']}/bin"
 end
