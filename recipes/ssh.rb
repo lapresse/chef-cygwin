@@ -40,7 +40,7 @@ if total < 1
     packages = %w( openssh cygrunsrv )
 
     ##  WARNING: cut-n-paste programming here... NOOOOOOOOO!
-    ## FIXME: make this a definition?
+    ## FIXME: USE the definition
     if node['cygwin']['proxy'].nil?
         proxycmd  = ""
     else
