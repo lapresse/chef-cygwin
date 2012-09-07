@@ -63,6 +63,12 @@ if total < 1
         # warning: respect password complexity requirements!
         command "bash /usr/bin/ssh-host-config --yes --cygwin \"ntsec\" --user #{node['cygwin']['sshd_user']} --pwd r\"#{node['cygwin']['sshd_passwd']}\" "
     end
+
+    # Make sure the password does not expire
+    execute "net-user-no-expire" do
+        command  "net user #{node['cygwin']['sshd_user']} /expires:never /active:yes"
+    end
+
     # Start the service
     execute "cygrunsrv" do
         cwd 'c:\cygwin\bin' 
