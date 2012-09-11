@@ -39,21 +39,12 @@ if total < 1
     # Install packages
     packages = %w( openssh cygrunsrv )
 
-    ##  WARNING: cut-n-paste programming here... NOOOOOOOOO!
-    ## FIXME: USE the definition
-    if node['cygwin']['proxy'].nil?
-        proxycmd  = ""
-    else
-        proxycmd  = "--proxy #{node['cygwin']['proxy']}"
-    end
-    execute "setup-more-packages.exe" do
-        # FIXME: don't do this everytime...
-        #not_if {File.exists?("/etc/passwd")}
-        cwd node['cygwin']['download_path'] 
-        command "setup.exe -q -O -R #{node['cygwin']['home']} -s #{node['cygwin']['site']} #{proxycmd} -P #{packages.join ','}"
-        action :run
-    end
 
+    packages.each do |pkg|
+        cygwin_package pkg do
+            action :install
+        end
+    end
 
     ## Configure sshd service
     execute "ssh-host-config" do
@@ -75,6 +66,12 @@ if total < 1
         environment ({'PATH' => '$PATH:.:/cygdrive/c/cygwin/bin'})
         command 'cygrunsrv -S sshd'
     end
+
+
+    ## FIXME: reboot is needed ; set it up correctly
+#    windows_reboot 60 do
+#        reason "Activating new SSHd Install"
+#    end
     
 else
     log("Skipped sshd installation: sshd.exe already running"){ level :info }
