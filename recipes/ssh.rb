@@ -68,6 +68,12 @@ if total < 1
     end
 
 
+  log("FIXME: SSHd running, you should enable it thru firewall (not managed yet, sorry")
+  # netsh advfirewall add portopening TCP 22 "Cygwin SSHd"
+  # en principe: 
+  # advfirewall: netsh advfirewall firewall add portopening TCP 22 "Cygwin SSHd" 
+  # mais ca ne fonctionne pas :(
+
     ## FIXME: reboot is needed ; set it up correctly
 #    windows_reboot 60 do
 #        reason "Activating new SSHd Install"
