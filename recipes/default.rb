@@ -50,6 +50,6 @@ execute "setup.exe" do
     action :run
 end
 
-windows_path "#{node['cygwin']['home']}/bin" do
+windows_path "#{node['cygwin']['home']}/bin".gsub( /\//, "\\") do
     action :add
 end
