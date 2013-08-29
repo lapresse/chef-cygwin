@@ -7,7 +7,7 @@ default['cygwin']['cygdrive_cache_path'] = "/cygdrive/c/chef/cache"
 
 # URL from where to download
 default['cygwin']['64bit'] = false
-default['cygwin']['download_url'] = "http://cygwin.com/setup-x86#{ node['cygwin'][64bit'] ? "_64": ""}.exe"
+default['cygwin']['download_url'] = "http://cygwin.com/setup-x86#{ node['cygwin']['64bit'] ? "_64": ""}.exe"
 
 
 # Cygwin HOME
