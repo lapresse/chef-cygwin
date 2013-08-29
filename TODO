@@ -1,0 +1,12 @@
+Todo: lots of things!
+
+- proper documentations
+
+- code cleanup
+
+- make it testable
+
+- Bugs:
+  - SSHd restart went it should not
+
+- Adapt the cookbook to work correctly with latest Windows cookbook versions
