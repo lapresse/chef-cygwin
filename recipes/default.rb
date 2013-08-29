@@ -25,9 +25,17 @@ directory node['cygwin']['download_path'] do
     action :create
 end
 
+case node['cygwin']['arch']
+when "x86"
+  download_url = "#{node['cygwin']['base_download_url']}/setup-x86.exe"
+when "x86_64"
+  download_url = "#{node['cygwin']['base_download_url']}/setup-x86_64.exe"
+else
+  log("cygwin arch #{node['cygwin']['arch']} not suppported"){ level :fatal }
+end
 
 remote_file "#{node['cygwin']['download_path']}/setup.exe" do
-  source node['cygwin']['download_url']
+  source download_url
   action :create_if_missing
 end
 

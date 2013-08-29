@@ -4,10 +4,10 @@ default['cygwin']['download_path'] = "c:/chef/downloads"
 # Set this to the cygdrive value of Chef::Config[:file_cache_path]
 default['cygwin']['cygdrive_cache_path'] = "/cygdrive/c/chef/cache"
 
-
+# CPU Architecture: x86 (default) or x86_64
+default['cygwin']['arch'] = "x86"
 # URL from where to download
-default['cygwin']['64bit'] = false
-default['cygwin']['download_url'] = "http://cygwin.com/setup-x86#{ node['cygwin']['64bit'] ? "_64": ""}.exe"
+default['cygwin']['base_download_url'] = "http://cygwin.com/"
 
 
 # Cygwin HOME
