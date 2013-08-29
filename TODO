@@ -10,3 +10,5 @@ Todo: lots of things!
   - SSHd restart went it should not
 
 - Adapt the cookbook to work correctly with latest Windows cookbook versions
+
+- Take advantage of windows reboot handler to reboot when needed.
