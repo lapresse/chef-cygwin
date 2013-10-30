@@ -1,0 +1,15 @@
+{
+  "sources": {
+    "cygwin": {
+      "path": "."
+    },
+    "windows": {
+      "locked_version": "1.11.1",
+      "git": "https://github.com/opscode-cookbooks/windows.git",
+      "ref": "6346c0da614fad2152bb34184e1f7e35ebf662c5"
+    },
+    "chef_handler": {
+      "locked_version": "1.1.4"
+    }
+  }
+}

@@ -15,49 +15,28 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
-
-
-
-# 1st, download cygwin's setup.exe
 
 directory node['cygwin']['download_path'] do
-    action :create
-end
-
-case node['cygwin']['arch']
-when "x86"
-  download_url = "#{node['cygwin']['base_download_url']}/setup-x86.exe"
-when "x86_64"
-  download_url = "#{node['cygwin']['base_download_url']}/setup-x86_64.exe"
-else
-  log("cygwin arch #{node['cygwin']['arch']} not suppported"){ level :fatal }
+  recursive true
 end
 
 remote_file "#{node['cygwin']['download_path']}/setup.exe" do
-  source download_url
+  source 'http://cygwin.com/setup-x86_64.exe'
   action :create_if_missing
 end
 
-# install, with default packages
-
-#.\setup.exe -q -O -R %CYGWIN_HOME% -s %SITE%
-
-if node['cygwin']['proxy'].nil?
-    proxycmd  = ""
+if Chef::Config['http_proxy'].nil?
+  proxycmd  = ""
 else
-    proxycmd  = "--proxy #{node['cygwin']['proxy']}"
+  proxycmd  = "--proxy #{Chef::Config['http_proxy']}"
 end
 
-
 execute "setup.exe" do
-    # installing will create this
-    not_if {File.exists?("c:/cygwin/etc/passwd")}
-    cwd node['cygwin']['download_path'] 
-    command "setup.exe -q -O -R #{node['cygwin']['home']} -s #{node['cygwin']['site']} #{proxycmd}"
-    action :run
+  cwd node['cygwin']['download_path']
+  command "setup.exe -q -O -R #{node['cygwin']['home']} -s #{node['cygwin']['site']} #{proxycmd}"
+  not_if {File.exists?("c:/cygwin/etc/passwd")}
 end
 
 windows_path "#{node['cygwin']['home']}/bin".gsub( /\//, "\\") do
-    action :add
+  action :add
 end

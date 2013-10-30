@@ -2,3 +2,4 @@
 *.swp
 cookbooks
 tmp
+.vagrant
